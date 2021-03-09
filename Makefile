@@ -34,6 +34,9 @@ release:
 	go build -buildmode c-shared -o ./bin/firehose.so ./
 	@echo "Built Amazon Kinesis Data Firehose Fluent Bit Plugin"
 
+plugin.tgz: $(PLUGIN_BINARY)
+	tar --strip-components 2 -zcvf plugin.tgz $(PLUGIN_BINARY)
+
 .PHONY: generate
 generate: $(SOURCES)
 	PATH=$(SCRIPT_PATH) go generate ./...
